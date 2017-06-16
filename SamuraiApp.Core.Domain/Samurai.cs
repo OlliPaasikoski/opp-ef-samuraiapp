@@ -8,6 +8,7 @@ namespace SamuraiApp.Core.Domain {
         public string Name { get; set; }
         public ICollection<Quote> Quotes { get; set; }
             = new List<Quote>();
-        public Guid BattleId { get; set; }
+        public ICollection<SamuraiBattle> SamuraiBattles { get; set; }
+        public SecretIdentity SecretIdentity { get; set; }
     }
 }

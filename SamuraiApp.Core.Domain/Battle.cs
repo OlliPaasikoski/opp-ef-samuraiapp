@@ -8,6 +8,6 @@ namespace SamuraiApp.Core.Domain {
         public string Name { get; set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
-        public ICollection<Samurai> Samurais { get; set; }
+        public ICollection<SamuraiBattle> SamuraiBattles { get; set; }
     }
 }

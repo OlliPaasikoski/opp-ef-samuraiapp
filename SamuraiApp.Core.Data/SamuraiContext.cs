@@ -10,9 +10,15 @@ namespace SamuraiApp.Core.Data
         public DbSet<Battle> Battles { get; set; }
         public DbSet<Quote> Quotes { get; set; } 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder builder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<SamuraiBattle>()
+                .HasKey(e => new { e.SamuraiId, e.BattleId });
+            base.OnModelCreating(modelBuilder);            
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {
-            builder.UseSqlServer(
+            optionsBuilder.UseSqlServer(
                 "Server=tcp:oppdev-sql.database.windows.net,1433;Initial Catalog=Samuraidev;Persist Security Info=False;User ID=bosky;Password=3KNUGA91NUlb;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"  
             );
 

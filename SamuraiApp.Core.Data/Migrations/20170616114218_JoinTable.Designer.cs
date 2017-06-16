@@ -8,9 +8,10 @@ using SamuraiApp.Core.Data;
 namespace SamuraiApp.Core.Data.Migrations
 {
     [DbContext(typeof(SamuraiContext))]
-    partial class SamuraiContextModelSnapshot : ModelSnapshot
+    [Migration("20170616114218_JoinTable")]
+    partial class JoinTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -70,24 +71,7 @@ namespace SamuraiApp.Core.Data.Migrations
 
                     b.HasIndex("BattleId");
 
-                    b.ToTable("SamuraiBattle");
-                });
-
-            modelBuilder.Entity("SamuraiApp.Core.Domain.SecretIdentity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("RealName");
-
-                    b.Property<Guid>("SamuraiId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SamuraiId")
-                        .IsUnique();
-
-                    b.ToTable("SecretIdentity");
+                    b.ToTable("SamuraiBattles");
                 });
 
             modelBuilder.Entity("SamuraiApp.Core.Domain.Quote", b =>
@@ -108,14 +92,6 @@ namespace SamuraiApp.Core.Data.Migrations
                     b.HasOne("SamuraiApp.Core.Domain.Samurai", "Samurai")
                         .WithMany("SamuraiBattles")
                         .HasForeignKey("SamuraiId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SamuraiApp.Core.Domain.SecretIdentity", b =>
-                {
-                    b.HasOne("SamuraiApp.Core.Domain.Samurai", "Samurai")
-                        .WithOne("SecretIdentity")
-                        .HasForeignKey("SamuraiApp.Core.Domain.SecretIdentity", "SamuraiId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }
